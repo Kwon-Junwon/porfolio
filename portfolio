@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>포트폴리오 — 이름</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── 토큰 ── */
+    :root {
+      --ink:      #111111;
+      --ink-2:    #555555;
+      --ink-3:    #999999;
+      --bg:       #F9F8F6;
+      --bg-card:  #FFFFFF;
+      --rule:     #E4E2DE;
+      --accent:   #1A3A5C;
+      --accent-lt:#EEF2F7;
+      --serif:    'DM Serif Display', Georgia, serif;
+      --sans:     'Noto Sans KR', sans-serif;
+      --max:      720px;
+      --gap:      clamp(2.5rem, 6vw, 5rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── 레이아웃 ── */
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section { padding: var(--gap) 0; }
+    section + section { border-top: 1px solid var(--rule); }
+
+    /* ── 네비 ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(249,248,246,0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--ink-2);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── 히어로 ── */
+    #hero { padding-top: clamp(3.5rem, 10vw, 7rem); padding-bottom: clamp(3rem, 8vw, 6rem); border-top: none; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-lt);
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 6vw, 4rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 1.2rem;
+    }
+    .hero-name em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--ink-2);
+      max-width: 480px;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .meta-item {
+      font-size: 0.78rem;
+      color: var(--ink-3);
+      letter-spacing: 0.04em;
+    }
+    .meta-item strong {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 1px;
+    }
+
+    /* ── 섹션 레이블 ── */
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 2rem;
+    }
+
+    /* ── 프로젝트 ── */
+    .project-list { display: flex; flex-direction: column; gap: 0; }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 1rem;
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none;
+      color: inherit;
+      transition: opacity .2s;
+      cursor: pointer;
+    }
+    .project-item:first-child { border-top: 1px solid var(--rule); }
+    .project-item:hover { opacity: 0.7; }
+
+    .project-left {}
+    .project-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 0.55rem;
+    }
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--accent);
+      background: var(--accent-lt);
+      padding: 2px 9px;
+      border-radius: 2px;
+      letter-spacing: 0.03em;
+    }
+    .project-title {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+      line-height: 1.3;
+    }
+    .project-desc {
+      font-size: 0.85rem;
+      color: var(--ink-2);
+      line-height: 1.7;
+      max-width: 520px;
+    }
+    .project-year {
+      font-size: 0.78rem;
+      color: var(--ink-3);
+      white-space: nowrap;
+      padding-top: 0.25rem;
+    }
+
+    /* ── 모달 ── */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(17,17,17,0.45);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .modal-backdrop.open { display: flex; }
+
+    .modal {
+      background: var(--bg-card);
+      border-radius: 4px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 2.5rem;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1.2rem; right: 1.4rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--ink-3);
+      cursor: pointer;
+      line-height: 1;
+    }
+    .modal-close:hover { color: var(--ink); }
+    .modal-eyebrow { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.6rem; }
+    .modal-title { font-family: var(--serif); font-size: 1.7rem; line-height: 1.2; color: var(--ink); margin-bottom: 1.2rem; }
+    .modal-body { font-size: 0.9rem; color: var(--ink-2); line-height: 1.9; }
+    .modal-body p + p { margin-top: 1rem; }
+    .modal-body strong { font-weight: 500; color: var(--ink); }
+    .modal-highlights {
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+      padding-top: 1.2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+    .highlight-item {}
+    .highlight-label { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 3px; }
+    .highlight-val { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
+
+    /* ── 스킬 ── */
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-group-title {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 0.8rem;
+    }
+    .skill-items { display: flex; flex-direction: column; gap: 0.5rem; }
+    .skill-row { display: flex; align-items: center; gap: 0.75rem; }
+    .skill-name { font-size: 0.88rem; color: var(--ink-2); min-width: 90px; }
+    .skill-bar-bg { flex: 1; height: 3px; background: var(--rule); border-radius: 2px; }
+    .skill-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; }
+
+    /* ── 연락처 ── */
+    .contact-grid {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--ink-2);
+      text-decoration: none;
+      border: 1px solid var(--rule);
+      padding: 8px 18px;
+      border-radius: 2px;
+      transition: border-color .2s, color .2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── 푸터 ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2rem 0;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--ink-3);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── 반응형 ── */
+    @media (max-width: 500px) {
+      .nav-links { display: none; }
+      .project-item { grid-template-columns: 1fr; }
+      .project-year { display: none; }
+      .modal { padding: 1.8rem 1.4rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 네비게이션 -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">이름</a>
+    <ul class="nav-links">
+      <li><a href="#projects">프로젝트</a></li>
+      <li><a href="#skills">역량</a></li>
+      <li><a href="#contact">연락</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- 히어로 -->
+<section id="hero">
+  <div class="container">
+    <span class="eyebrow">전략 기획 지망</span>
+    <h1 class="hero-name">
+      문제를 구조화하고<br>
+      <em>실행 가능한 전략</em>을 만듭니다
+    </h1>
+    <p class="hero-sub">
+      데이터 기반 시장 분석부터 신사업 기획까지 — 복잡한 문제를 
+      명확한 논리로 풀어내는 기획자입니다.
+    </p>
+    <div class="hero-meta">
+      <div class="meta-item"><strong>이름</strong>홍길동</div>
+      <div class="meta-item"><strong>학교</strong>○○대학교 경영학과</div>
+      <div class="meta-item"><strong>관심 분야</strong>전략기획 / 신사업</div>
+    </div>
+  </div>
+</section>
+
+<!-- 프로젝트 -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label">Projects</p>
+    <div class="project-list" id="projectList"></div>
+  </div>
+</section>
+
+<!-- 역량 -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label">Skills</p>
+    <div class="skill-grid">
+      <div>
+        <p class="skill-group-title">분석 · 기획</p>
+        <div class="skill-items">
+          <div class="skill-row">
+            <span class="skill-name">시장 분석</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">재무 모델링</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:75%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">전략 프레임</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="skill-group-title">도구</p>
+        <div class="skill-items">
+          <div class="skill-row">
+            <span class="skill-name">Excel / PPT</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:92%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Python</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:65%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">AI 활용</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:88%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="skill-group-title">소프트 스킬</p>
+        <div class="skill-items">
+          <div class="skill-row">
+            <span class="skill-name">문서 작성</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">발표 · 설득</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">팀 협업</span>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 연락처 -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Contact</p>
+    <p style="font-size:0.95rem; color:var(--ink-2); margin-bottom:1.5rem; max-width:400px;">
+      새로운 기회나 협업 제안은 언제든지 환영합니다.
+    </p>
+    <div class="contact-grid">
+      <a href="mailto:your@email.com" class="contact-link">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+        your@email.com
+      </a>
+      <a href="https://github.com/yourid" target="_blank" rel="noopener" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+      <a href="https://linkedin.com/in/yourid" target="_blank" rel="noopener" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    © 2026 홍길동 · 직접 만든 포트폴리오
+  </div>
+</footer>
+
+<!-- 모달 -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModalDirect()">&times;</button>
+    <p class="modal-eyebrow" id="modalEyebrow"></p>
+    <h2 class="modal-title" id="modalTitle"></h2>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-highlights" id="modalHighlights"></div>
+  </div>
+</div>
+
+<script>
+  /* ── 프로젝트 데이터 ── 이 부분을 직접 수정하세요 */
+  const projects = [
+    {
+      year: "2026",
+      tags: ["전략 분석", "PPT"],
+      title: "현대자동차 신사업 진출 및 Value-up 방안",
+      desc: "C.A.S.E. 트렌드 기반 완성차 산업 분석 및 신사업 스크리닝을 통해 자율주행 차량 판매 사업을 최종 신사업으로 도출.",
+      detail: `<p><strong>배경:</strong> 글로벌 완성차 시장 성장 둔화와 내연기관 중심 수익 구조의 한계를 진단하고, 장기 성장 동력 확보를 위한 신사업 방향을 제시했습니다.</p>
+               <p><strong>분석 방법:</strong> 산업 분석 → 자사 분석 → 신사업 목표 설정 → 2차 스크리닝 (시장 규모 × 시장 성장성 × 시장 진출 용이성 × 기존 역량 접목 × 정부 지원) 순으로 진행했습니다.</p>
+               <p><strong>결론:</strong> 자율주행 차량 판매 사업이 현대차의 역량과 가장 부합하는 신사업으로 도출되었으며, 구체적인 KBF와 세부 전략을 제안했습니다.</p>`,
+      highlights: [
+        { label: "분석 프레임", val: "C.A.S.E." },
+        { label: "스크리닝 항목", val: "5개 기준" },
+        { label: "팀 규모", val: "4인" },
+        { label: "기간", val: "4주" },
+      ]
+    },
+    {
+      year: "2025",
+      tags: ["시장 분석", "Python"],
+      title: "생분해 포장재 신규 시장 세그먼트 분석",
+      desc: "카페 컵 캐리어·회초밥 트레이·김밥 포장재 3개 세그먼트에 대한 Bottom-up 시장 규모 추정 및 진입 우선순위 도출.",
+      detail: `<p><strong>배경:</strong> 친환경 포장재 스타트업의 신규 고객사 확대 전략 수립을 위해 국내 B2B 포장재 시장을 세그먼트별로 분해해 분석했습니다.</p>
+               <p><strong>방법론:</strong> 공개 데이터 크롤링, 물가지수 조정, 가중평균 점유율 계산 등 Bottom-up 방식으로 각 세그먼트의 잠재 시장 규모를 추정했습니다.</p>
+               <p><strong>결과:</strong> 회·초밥 트레이(134억) > 카페 컵 캐리어(50억) > 김밥 포장재(3억) 순으로 시장 규모를 추정했으며, 전환 장벽과 친환경 관심도를 고려해 카페 세그먼트를 1순위 진입 타겟으로 선정했습니다.</p>`,
+      highlights: [
+        { label: "분석 세그먼트", val: "3개" },
+        { label: "총 시장 규모", val: "187억 원" },
+        { label: "1순위 타겟", val: "카페 컵 캐리어" },
+        { label: "활용 툴", val: "Python · Excel" },
+      ]
+    },
+    {
+      year: "2025",
+      tags: ["데이터", "자동화"],
+      title: "웹 크롤링 기반 경쟁사 가격 모니터링",
+      desc: "Python BeautifulSoup을 활용해 경쟁사 제품 가격을 자동 수집·정리하는 스크립트 개발. 반복 업무 대비 90% 시간 절감.",
+      detail: `<p><strong>배경:</strong> 주 1회 수작업으로 진행하던 경쟁사 가격 조사를 자동화해 팀의 반복 업무를 줄이고자 했습니다.</p>
+               <p><strong>구현:</strong> Python requests + BeautifulSoup으로 대상 사이트 크롤링, pandas로 데이터 정제 후 Excel 자동 저장. 에러 핸들링 및 재시도 로직 포함.</p>
+               <p><strong>성과:</strong> 기존 3시간 소요 작업을 10분 이내로 단축. 팀 내 공유 후 정기 업무 프로세스로 채택되었습니다.</p>`,
+      highlights: [
+        { label: "사용 기술", val: "Python" },
+        { label: "시간 절감", val: "90%" },
+        { label: "수집 항목", val: "가격·재고·리뷰" },
+        { label: "형태", val: "자동화 스크립트" },
+      ]
+    },
+  ];
+
+  /* ── 렌더링 ── */
+  const list = document.getElementById('projectList');
+  projects.forEach((p, i) => {
+    const el = document.createElement('div');
+    el.className = 'project-item';
+    el.setAttribute('role', 'button');
+    el.setAttribute('tabindex', '0');
+    el.innerHTML = `
+      <div class="project-left">
+        <div class="project-tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        <p class="project-title">${p.title}</p>
+        <p class="project-desc">${p.desc}</p>
+      </div>
+      <span class="project-year">${p.year}</span>`;
+    el.addEventListener('click', () => openModal(i));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openModal(i); });
+    list.appendChild(el);
+  });
+
+  /* ── 모달 ── */
+  function openModal(i) {
+    const p = projects[i];
+    document.getElementById('modalEyebrow').textContent = p.tags.join(' · ');
+    document.getElementById('modalTitle').textContent = p.title;
+    document.getElementById('modalBody').innerHTML = p.detail;
+    const hl = document.getElementById('modalHighlights');
+    hl.innerHTML = p.highlights.map(h =>
+      `<div class="highlight-item"><p class="highlight-label">${h.label}</p><p class="highlight-val">${h.val}</p></div>`
+    ).join('');
+    document.getElementById('modalBackdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(e) {
+    if (e.target === document.getElementById('modalBackdrop')) closeModalDirect();
+  }
+  function closeModalDirect() {
+    document.getElementById('modalBackdrop').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+</script>
+
+</body>
+</html>
