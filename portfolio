@@ -72,7 +72,7 @@
       text-decoration: none;
       letter-spacing: 0.01em;
     }
-    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; overflow-x: auto; }
     .nav-links a {
       font-size: 0.8rem;
       font-weight: 400;
@@ -314,7 +314,81 @@
       .modal { padding: 1.8rem 1.4rem; }
     }
 
-    @media (prefers-reduced-motion: reduce) {
+    /* ── 타임라인 (학회·인턴) ── */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .tl-item {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 1.5rem;
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .tl-item:first-child { border-top: 1px solid var(--rule); }
+    .tl-period {
+      font-size: 0.78rem;
+      color: var(--ink-3);
+      padding-top: 0.15rem;
+      line-height: 1.5;
+    }
+    .tl-body {}
+    .tl-org {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+    .tl-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+      line-height: 1.3;
+    }
+    .tl-desc {
+      font-size: 0.85rem;
+      color: var(--ink-2);
+      line-height: 1.7;
+    }
+    .tl-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 0.5rem; }
+
+    /* ── 자료 카드 그리드 ── */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .resource-card {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 1.2rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: border-color .2s;
+    }
+    .resource-card:hover { border-color: var(--accent); }
+    .resource-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--accent-lt);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .resource-icon svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .resource-title { font-size: 0.9rem; font-weight: 500; color: var(--ink); line-height: 1.3; }
+    .resource-meta { font-size: 0.75rem; color: var(--ink-3); }
+
+    @media (max-width: 500px) {
+      .tl-item { grid-template-columns: 1fr; gap: 0.3rem; }
+      .tl-period { font-size: 0.72rem; }
+    }
       * { transition: none !important; }
     }
   </style>
@@ -326,8 +400,11 @@
   <div class="nav-inner">
     <a class="nav-logo" href="#hero">이름</a>
     <ul class="nav-links">
-      <li><a href="#projects">프로젝트</a></li>
-      <li><a href="#skills">역량</a></li>
+      <li><a href="#club">학회 활동</a></li>
+      <li><a href="#internal">내부 프로젝트</a></li>
+      <li><a href="#industry">산학 프로젝트</a></li>
+      <li><a href="#intern">인턴</a></li>
+      <li><a href="#resources">자료</a></li>
       <li><a href="#contact">연락</a></li>
     </ul>
   </div>
@@ -353,15 +430,174 @@
   </div>
 </section>
 
-<!-- 프로젝트 -->
-<section id="projects">
+<!-- 학회 활동 -->
+<section id="club">
   <div class="container">
-    <p class="section-label">Projects</p>
-    <div class="project-list" id="projectList"></div>
+    <p class="section-label">학회 활동</p>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <span class="tl-period">2024.03<br>— 현재</span>
+        <div class="tl-body">
+          <p class="tl-org">Eyes of Global Insight (EGI)</p>
+          <p class="tl-title">전략 분석 학회 — 기획팀</p>
+          <p class="tl-desc">실제 기업 케이스를 기반으로 산업 분석 및 신사업 전략을 수립하는 프로젝트 중심 학회. 현대자동차 Value-up 방안, 생분해 포장재 시장 분석 등 다수 프로젝트 참여.</p>
+          <div class="tl-tags">
+            <span class="tag">전략 분석</span>
+            <span class="tag">케이스 스터디</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <span class="tl-period">2023.03<br>— 2024.02</span>
+        <div class="tl-body">
+          <p class="tl-org">경영학회 ○○</p>
+          <p class="tl-title">학회원</p>
+          <p class="tl-desc">학회 활동 내용을 여기에 작성하세요.</p>
+          <div class="tl-tags">
+            <span class="tag">경영</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
-<!-- 역량 -->
+<!-- 내부 프로젝트 -->
+<section id="internal">
+  <div class="container">
+    <p class="section-label">내부 프로젝트</p>
+    <div class="project-list" id="internalList">
+
+      <div class="project-item" role="button" tabindex="0" onclick="openCustomModal('현대자동차 신사업 진출 및 Value-up 방안', '전략 분석 · PPT', '<p><strong>배경:</strong> 글로벌 완성차 시장 성장 둔화와 내연기관 중심 수익 구조의 한계를 진단하고, 장기 성장 동력 확보를 위한 신사업 방향을 제시했습니다.</p><p><strong>결론:</strong> 자율주행 차량 판매 사업이 현대차 역량과 가장 부합하는 신사업으로 선정되었습니다.</p>', [{label:\'팀 규모\',val:\'4인\'},{label:\'기간\',val:\'4주\'},{label:\'프레임\',val:\'C.A.S.E.\'}])">
+        <div class="project-left">
+          <div class="project-tags"><span class="tag">전략 분석</span><span class="tag">PPT</span></div>
+          <p class="project-title">현대자동차 신사업 진출 및 Value-up 방안</p>
+          <p class="project-desc">C.A.S.E. 트렌드 기반 완성차 산업 분석 및 신사업 스크리닝을 통해 자율주행 차량 판매 사업을 최종 신사업으로 도출.</p>
+        </div>
+        <span class="project-year">2026</span>
+      </div>
+
+      <div class="project-item" role="button" tabindex="0" onclick="openCustomModal('내부 프로젝트 제목', '분야 · 툴', '<p>프로젝트 상세 내용을 여기에 작성하세요.</p>', [{label:\'기간\',val:\'N주\'},{label:\'팀 규모\',val:\'N인\'}])">
+        <div class="project-left">
+          <div class="project-tags"><span class="tag">프로젝트</span></div>
+          <p class="project-title">내부 프로젝트 제목</p>
+          <p class="project-desc">프로젝트 한 줄 요약을 여기에 작성하세요.</p>
+        </div>
+        <span class="project-year">2025</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 산학 프로젝트 -->
+<section id="industry">
+  <div class="container">
+    <p class="section-label">산학 프로젝트</p>
+    <div class="project-list">
+
+      <div class="project-item" role="button" tabindex="0" onclick="openCustomModal('생분해 포장재 신규 시장 분석', '시장 분석 · Python', '<p><strong>배경:</strong> 친환경 포장재 스타트업 더데이원랩의 신규 고객사 확대 전략 수립을 위해 국내 B2B 포장재 시장을 세그먼트별로 분석했습니다.</p><p><strong>결과:</strong> 카페 컵 캐리어를 1순위 진입 타겟으로 선정하고 구체적 영업 전략을 제안했습니다.</p>', [{label:\'협력 기업\',val:\'더데이원랩\'},{label:\'시장 규모\',val:\'187억 원\'},{label:\'세그먼트\',val:\'3개\'}])">
+        <div class="project-left">
+          <div class="project-tags"><span class="tag">시장 분석</span><span class="tag">Python</span><span class="tag">산학</span></div>
+          <p class="project-title">생분해 포장재 신규 시장 세그먼트 분석</p>
+          <p class="project-desc">더데이원랩 × EGI 산학 협력. 카페·회초밥·김밥 3개 세그먼트 Bottom-up 시장 규모 추정 및 진입 우선순위 도출.</p>
+        </div>
+        <span class="project-year">2025</span>
+      </div>
+
+      <div class="project-item" role="button" tabindex="0" onclick="openCustomModal('산학 프로젝트 제목', '분야', '<p>산학 프로젝트 상세 내용을 작성하세요.</p>', [{label:\'협력 기업\',val:\'기업명\'},{label:\'기간\',val:\'N주\'}])">
+        <div class="project-left">
+          <div class="project-tags"><span class="tag">산학</span></div>
+          <p class="project-title">산학 프로젝트 제목</p>
+          <p class="project-desc">산학 프로젝트 한 줄 요약을 여기에 작성하세요.</p>
+        </div>
+        <span class="project-year">2025</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 인턴 -->
+<section id="intern">
+  <div class="container">
+    <p class="section-label">인턴</p>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <span class="tl-period">2025.07<br>— 2025.08</span>
+        <div class="tl-body">
+          <p class="tl-org">회사명</p>
+          <p class="tl-title">전략기획팀 인턴</p>
+          <p class="tl-desc">담당 업무와 주요 성과를 여기에 작성하세요. 구체적인 수치나 결과물을 포함하면 좋아요.</p>
+          <div class="tl-tags">
+            <span class="tag">전략기획</span>
+            <span class="tag">시장 조사</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <span class="tl-period">2024.12<br>— 2025.02</span>
+        <div class="tl-body">
+          <p class="tl-org">회사명</p>
+          <p class="tl-title">○○팀 인턴</p>
+          <p class="tl-desc">담당 업무와 주요 성과를 여기에 작성하세요.</p>
+          <div class="tl-tags">
+            <span class="tag">업무 태그</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 자료 -->
+<section id="resources">
+  <div class="container">
+    <p class="section-label">자료</p>
+    <div class="resource-grid">
+
+      <a href="#" class="resource-card">
+        <div class="resource-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <p class="resource-title">현대차 전략 분석 보고서</p>
+        <p class="resource-meta">PDF · 2026</p>
+      </a>
+
+      <a href="#" class="resource-card">
+        <div class="resource-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <p class="resource-title">생분해 포장재 시장 분석 PPT</p>
+        <p class="resource-meta">PPTX · 2025</p>
+      </a>
+
+      <a href="#" class="resource-card">
+        <div class="resource-icon">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <p class="resource-title">크롤링 자동화 스크립트</p>
+        <p class="resource-meta">Python · GitHub</p>
+      </a>
+
+      <a href="#" class="resource-card">
+        <div class="resource-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <p class="resource-title">자료 제목</p>
+        <p class="resource-meta">형식 · 연도</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
 <section id="skills">
   <div class="container">
     <p class="section-label">Skills</p>
@@ -463,6 +699,18 @@
 </div>
 
 <script>
+  /* ── 커스텀 모달 오픈 (인라인 onclick용) ── */
+  function openCustomModal(title, eyebrow, detail, highlights) {
+    document.getElementById('modalEyebrow').textContent = eyebrow;
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalBody').innerHTML = detail;
+    document.getElementById('modalHighlights').innerHTML = highlights.map(h =>
+      `<div class="highlight-item"><p class="highlight-label">${h.label}</p><p class="highlight-val">${h.val}</p></div>`
+    ).join('');
+    document.getElementById('modalBackdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
   /* ── 프로젝트 데이터 ── 이 부분을 직접 수정하세요 */
   const projects = [
     {
